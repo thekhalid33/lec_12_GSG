@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import '../home_screen.dart';
+import 'package:session10/router/app_router.dart';
 
 import '../globals.dart';
 import '../models/form_user.dart';
 
 class CustomerRegister extends StatelessWidget {
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String email;
@@ -42,7 +41,6 @@ class CustomerRegister extends StatelessWidget {
                 filled: true,
               ),
             ),
-    
           ),
           Container(
             margin: EdgeInsets.all(20),
@@ -64,17 +62,16 @@ class CustomerRegister extends StatelessWidget {
           ),
           ElevatedButton(
             child: Text('Sign Up As Customer'),
-            onPressed: () {
+            onPressed: () async {
               if (formKey.currentState.validate()) {
                 formKey.currentState.save();
                 FormUser formUser =
                     FormUser.customer(email: email, password: password);
                 Globals.globals.formUser = formUser;
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => HomeScreen(),
-                  ),
-                );
+                // dynamic result =
+                //     await Navigator.of(context).pushNamed('/home');
+                AppRouter.router.pushNamedFunction('/home');
+                // print(result);
               }
             },
           ),

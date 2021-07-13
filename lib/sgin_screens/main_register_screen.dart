@@ -7,6 +7,7 @@ import 'customer_register_page.dart';
 import 'mershant_register_page.dart';
 
 class MainRegister extends StatefulWidget {
+  static final routeName = '/';
   @override
   _MainRegisterState createState() => _MainRegisterState();
 }
@@ -40,41 +41,43 @@ class _MainRegisterState extends State<MainRegister> {
         title: Text('Form'),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: RadioListTile(
-                  title: Text('Customer'),
-                  value: UserType.customer,
-                  groupValue: groupValue,
-                  onChanged: (v) {
-                    this.groupValue = v;
-                    setState(() {});
-                  },
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: RadioListTile(
+                    title: Text('Customer'),
+                    value: UserType.customer,
+                    groupValue: groupValue,
+                    onChanged: (v) {
+                      this.groupValue = v;
+                      setState(() {});
+                    },
+                  ),
                 ),
-              ),
-              Expanded(
-                child: RadioListTile(
-                  title: Text('Producer'),
-                  value: UserType.mershant,
-                  groupValue: groupValue,
-                  onChanged: (v) {
-                    this.groupValue = v;
-                    setState(() {});
-                  },
+                Expanded(
+                  child: RadioListTile(
+                    title: Text('Producer'),
+                    value: UserType.mershant,
+                    groupValue: groupValue,
+                    onChanged: (v) {
+                      this.groupValue = v;
+                      setState(() {});
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-          groupValue == UserType.customer
-              ? CustomerRegister()
-              : MershantRegister(),
-        ],
+              ],
+            ),
+            groupValue == UserType.customer
+                ? CustomerRegister()
+                : MershantRegister(),
+          ],
+        ),
       ),
     );
   }
